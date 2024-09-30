@@ -1,0 +1,3 @@
+#filename|action|optional/relative/dir
+.vimrc|symlink|
+.bashrc|source|
