@@ -10,4 +10,8 @@ set ignorecase
 set smartcase
 set incsearch
 
+highlight LineNrAbove ctermfg=darkgrey
+highlight LineNr ctermfg=white
+highlight LineNrBelow ctermfg=darkgrey
+
 autocmd BufEnter * if &filetype == "go" | setlocal noexpandtab
