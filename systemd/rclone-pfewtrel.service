@@ -1,0 +1,21 @@
+[Unit]
+Description=RClone (pfewtrel@google)
+AssertPathIsDirectory=%h/Documents/pfewtrel-Private
+# Make sure we have network enabled
+After=network.target
+
+[Service]
+Type=simple
+
+ExecStart=/usr/bin/rclone mount --vfs-cache-mode full pfewtrel_gmail:Private %h/Documents/pfewtrel-Private
+
+# Perform lazy unmount
+ExecStop=/usr/bin/fusermount -zu %h/Documents/pfewtrel-Private
+
+# Restart the service whenever rclone exists with non-zero exit code
+Restart=on-failure
+RestartSec=15
+
+[Install]
+# Autostart after reboot
+WantedBy=default.target

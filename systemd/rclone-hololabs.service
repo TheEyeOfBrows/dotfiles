@@ -1,0 +1,21 @@
+[Unit]
+Description=RClone (patrick@hololabs)
+AssertPathIsDirectory=%h/Documents/hololabs-Private
+# Make sure we have network enabled
+After=network.target
+
+[Service]
+Type=simple
+
+ExecStart=/usr/bin/rclone mount --vfs-cache-mode full patrick_hololabs:Private %h/Documents/hololabs-Private
+
+# Perform lazy unmount
+ExecStop=/usr/bin/fusermount -zu %h/Documents/hololabs-Private
+
+# Restart the service whenever rclone exists with non-zero exit code
+Restart=on-failure
+RestartSec=15
+
+[Install]
+# Autostart after reboot
+WantedBy=default.target
